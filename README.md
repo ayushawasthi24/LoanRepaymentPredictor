@@ -3,11 +3,11 @@ A django project based on a trained machine learning model that predicts whether
 
 ## Prerequisites
 
--django
--numpy
--pandas
--joblib
--sklearn
+django <br>
+numpy <br>
+pandas <br>
+joblib <br>
+sklearn <br>
 
 ## How to run?
 
