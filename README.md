@@ -3,14 +3,14 @@ A django project based on a trained machine learning model that predicts whether
 
 ## Prerequisites
 
-Django
-numpy
-pandas
-joblib
-sklearn
+-django
+-numpy
+-pandas
+-joblib
+-sklearn
 
 ## How to run?
 
-Clone the repository to your local machine.
-Go to the root folder in your terminal
-Run : python manage.py runserver
+Clone the repository to your local machine. <br />
+Go to the root folder in your terminal. <br />
+Run : 'python manage.py runserver'. <br />
