@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %} 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Loan Repayment Predictor</title>
+</head>
+<style>
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+</style>
+<body>
+  
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark navbar-dark" style="color: white;">
+        <div class="container-fluid mx-5">
+          <a class="navbar-brand" href="#">Loan Repayment Predictor</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <section class="bg-dark text-light p-5 text-center text-sm-start">
+        <div class="container">
+           <div class="d-sm-flex align-items-center justify-content-between">
+            <div class="container my-5">
+              <h1>Loan Repayment Predictor</h1>
+              <p class="lead my-4">With our ML model you can predict whether you will be able to repy your loan or not.
+               <br> Just enter the few details and you're good to go!
+              </p>
+              <button class="btn btn-primary btn-lg"><a class="text-light" style="text-decoration: none;" href="#form">Get Started</a></button>
+            </div>
+            <img src="../static/images/loan.jpg" alt="" class="img-fluid w-50 d-none d-sm-block" />
+           </div>
+        </div>
+      </section>
+      
+      <section class="bg-secondary p-5">
+        <div class="container p-6"></div>
+      </section>
+
+      <section id="form">
+        <form action="predict" method="POST">
+          {% csrf_token %}
+        <div class="container my-3">
+            <h3>Enter the following details:</h3>
+                <div class="form-group">
+                  <label for="number of people">Number of people who will provide maintenence</label>
+                  <input type="number" name="noofpeople" class="form-control">
+
+                  <label for="loanhistory">Loan History</label>
+                  <select name="loanhistory" id="loanhistory" class="form-control">
+                    <option value="0">All Loans at this bank paid back duly</option>
+                    <option value="1">Critical Account/Other loans existing (not at this bank)</option>
+                    <option value="2">Delay in paying off loans in the past</option>
+                    <option value="3">Existing loans paid back duly till now</option>
+                    <option value="4">No loans taken/All loans paid back duly</option>
+                  </select>
+                  <br>
+                  <label for="purpose">Purpose of taking loan</label>                
+                  <select name="purpose" id="purpose" class="form-control">
+                    <option value="0">Education Loan</option>
+                    <option value="1">Loan for Business Establishment</option>
+                    <option value="2">Loan for retraining</option>
+                    <option value="3">New Car Purchase</option>
+                    <option value="4">Old Car Repair</option>
+                    <option value="5">Other Repairs</option>
+                    <option value="6">Purchase of domestic appliances</option>
+                    <option value="7">Purchase of furniture/equipment</option>
+                    <option value="8">Purchase of radio/television</option>
+                    <option value="9">Other</option>
+                  </select>
+                  <br>
+                  <label for="amt">Loan Amount Taken</label>                
+                  <input type="text" name="amt" class="form-control" placeholder="Enter the amount">
+                  <br>
+                  <label for="guarantorordebtor">Guarantor or Debtor</label><br>
+                  <select name="guarantorordebtor" id="guarantorordebtor" class="form-control">
+                    <option value="1">Guarantor</option>
+                    <option value="0">Debtor</option>
+                    <option value="2">None</option>
+                  </select>
+
+                  <label for="empl">Number of years of employment</label>
+                  <select name="empl" id="empl" class="form-control">
+                    <option value="2">Less than a year</option>
+                    <option value="0">Between 1 and 4 years</option>
+                    <option value="1">Greater than 4 years</option>
+                    <option value="3">Unemployed</option>
+                    </select>
+                  <br>  
+
+                  <label for="marital">Marital Status</label>
+                  <select name="marital" id="marital" class="form-control">
+                    <option value="0">Female and divorced/seperated/married</option>
+                    <option value="1">Male and divorced/seperated</option>
+                    <option value="2">Male and married/widowed</option>
+                    <option value="3">Male and single</option>
+                  </select>
+                  <br>
+                  <label for="loans">Number of Loans taken from current bank</label>
+                  <input type="text" name="loans" class="form-control" placeholder="Enter the number of loans">
+                  <br>
+                  <label for="age">Age of Applicant</label>
+                  <input type="number" name="age" class="form-control" placeholder="Age">
+                  <br>
+                  <label for="currentamt">Amount in current account</label>
+                  <select name="currentamt" id="currentamt" class="form-control">
+                    <option value="0">Between 0 and 200</option>
+                    <option value="1">Greater than 200</option>
+                    <option value="2">Less than 0</option>
+                    <option value="3">No current account</option>
+                  </select>
+                  <br>
+                  <label for="savingsamt">Amount in savings account</label>
+                  <select name="savingsamt" id="purpose" class="form-control">
+                    <option value="0">Between 100 and 500</option>
+                    <option value="1">Between 500 and 1000</option>
+                    <option value="2">Greater than 1000</option>
+                    <option value="3">Less than 100</option>
+                    <option value="4">No savings account</option>
+                    </select>
+                    <br>
+                  <label for="percentofincome">% of income paid as installment</label>
+                  <input type="number" name="percentofincome" class="form-control" placeholder="Enter the percent of income">
+                  <br>
+                  <label for="otherloanplans">Other loan plans taken</label>
+                  <select name="otherloanplans" id="otherloanplans" class="form-control">
+                    <option value="0">Bank</option>
+                    <option value="2">Stores</option>
+                    <option value="1">None</option>
+                  </select>
+                  <br>
+                  <label for="workingabroad">Working abroad or not</label><br>
+                  <select name="workingabroad" id="workingabroad" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select><br>
+
+                  <label for="telphone">Is there a telephone number available?</label><br>
+                  <select name="telephone" id="telephone" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select><br>
+                  <label for="timeduration">Time duration for loan</label>              
+                  <input type="number" name="timeduration" class="form-control">
+                  <br>
+                  <label for="ownedprop">Owned Property</label>              
+                  <select name="ownedprop" id="ownedprop" class="form-control">
+                    <option value="0">Building society savings agreement/life insurance</option>
+                    <option value="1">Car or other property</option>
+                    <option value="2">No Property</option>
+                    <option value="3">Real Estate</option>
+                  </select>
+                  <br>
+                  <label for="typeofjob">Type of job Performed</label> 
+                  <select name="job" id="job" class="form-control">
+                    <option value="0">Management/self-employed/highly qualified employee/officer</option>
+                    <option value="1">Skilled employee/official</option>
+                    <option value="2">Unemployed/unskilled non-resident</option>
+                    <option value="3">Unskilled resident</option>   
+                    </select>
+                    <br>
+                  <label for="typeofhousing">Type of Housing</label>
+                  <select name="housing" id="housing" class="form-control">
+                    <option value="0">For free</option>
+                    <option value="1">Own</option>
+                    <option value="2">Rent</option></select><br>
+
+                  <label for="noincurrentaddresss">Number of years of stay in current address</label> 
+                  <input type="number" id="noincurrentaddress" class="form-control" name="noincurrentaddress">         
+                  <br>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+        </div>
+      </form>
+      </section>
+
+      <footer class="footer bg-dark mt-auto py-3 text-white text-center position-relative">
+        <div class="container">
+          <p class="lead">Copyright &copy; 2023 IO_Rangers</p>
+          <a href="#" class="position-absolute bottom-0 end-0 p-5 mt-5" style="text-decoration: none;">Go to top</i></a>
+        </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+</html>
