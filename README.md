@@ -14,3 +14,7 @@ sklearn <br>
 Clone the repository to your local machine. <br />
 Go to the root folder in your terminal. <br />
 Run : 'python manage.py runserver'. <br />
+
+
+--Built for the Enosium Hackathon
+
